@@ -17,20 +17,18 @@ def caesar(s,k,decrypt=False):
 def decrypt(c,k):
 		return caesar(c,k,True)
 
-run=True
-key=0
-i=0
-text="Vg jbhyq frrz gung, nf ur rknzvarq gur frireny cbffvovyvgvrf, n fhfcvpvba pebffrq uvf zvaq: gur zrzbel bs ubj ur uvzfrys unq orunirq va rneyvre qnlf znqr uvz nfx jurgure fbzrbar zvtug or uvqvat ure sebz gur jbeyq"
+e="Vg jbhyq frrz gung, nf ur rknzvarq gur frireny cbffvovyvgvrf, n fhfcvpvba pebffrq uvf zvaq: gur zrzbel bs ubj ur uvzfrys unq orunirq va rneyvre qnlf znqr uvz nfx jurgure fbzrbar zvtug or uvqvat ure sebz gur jbeyq"
 #brute force and try it with diffrent keys.
 
-while run:
-	#loop will keep going until the user presses Y or Y. displaying the text to the user.
-	print decrypt(text,i)
-	ans=raw_input("is this the key? y/n")
-	if (ans == "Y" or ans == "y" ):
-	 	key=i
-	 	run=False
-	else:
-	 	i+=1 
-print("the key is : ", key)
+def getKey(e):
+	key = 0
+	while key < 26:
+		key = key + 1
+		e = decrypt(e,key)
+		if "It" and "e" in e:
+			e = e
+	return e
+
+string = getKey(e)
+print string
 
