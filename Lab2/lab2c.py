@@ -1,19 +1,24 @@
-plaintext   = raw_input("Input String: ").upper().replace(" ","")
-key         = raw_input("Key: ").upper()
+#D12122837
+#Abdulellah Hakim
+# Encrypts ciphertext using Vignere cipher
 
-print(plaintext)
-if len(key) == 0:
-    print "Key must be of length 1 or more."; exit()
-if not plaintext.isalpha() or not key.isalpha():
-    print "Input and key must be composed of letters only."; exit()
+from itertools import starmap, cycle
+ 
+def encrypt(message, key):
+ #converts to uppercase and remvoes all non alphabetic digits
+    message = filter(str.isalpha, message.upper())
+    # single letter encrpytion.
+    def enc(c,k): return chr(((ord(k) + ord(c) - 2*ord('A')) % 26) + ord('A'))
+ 
+    return "".join(starmap(enc, zip(message, cycle(key))))
 
-crypt = ''
-decrypt = ''
-for n in range(0, len(plaintext)):
-    new = ord(plaintext[n]) + ord(key[n%len(key)]) - 65
-    if new > 90:
-        new -= 26
-    crypt += chr(new)
-    new = ord(plaintext[n]) - ord(key[n%len(key)]) + 65
-   
-print "Crypted text: " + crypt
+#plain text:I shall (from now on) select and take the ingots individually in my own yard, 
+#and I shall exercise against you my right of rejection because you have treated me with contempt.
+
+msg = raw_input("Input String: ")
+key = "PASSWORD"
+
+emsg = encrypt(msg, key)
+
+print msg
+print emsg 
